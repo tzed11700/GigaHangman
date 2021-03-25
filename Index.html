@@ -12,7 +12,7 @@
 
     <Header>
 
-<h1 style="font-family: 'Times New Roman', Times, serif;color:coral">Giga Hangman</h1>
+<h1 style="font-family: 'Times New Roman', Times, serif;color:#00ff00">Giga Hangman</h1>
 
 <button onclick="newGame()">New Game</button>
 
@@ -51,6 +51,8 @@
         <p>Bad Letters:</p>
         <ul style="color: crimson;font-weight: bold;font-family: 'Courier New';" id="incorrectGuesses">
             
+            <li style="color:#444444"></li>
+            
         </ul>
     </div>
 
@@ -84,7 +86,7 @@
         isWinner = false
         document.getElementById('score').innerHTML = score
         document.getElementById('chances').innerHTML = chances
-        document.getElementById('incorrectGuesses').innerHTML = '| '
+        document.getElementById('incorrectGuesses').innerHTML = ''
 
         document.getElementById('winmsg').style.display = 'none'
         document.getElementById('losemsg').style.display = 'none'
