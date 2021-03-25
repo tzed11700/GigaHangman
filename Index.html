@@ -12,7 +12,7 @@
 
     <Header>
 
-<h1 style="font-family: 'Times New Roman', Times, serif;color:#00ff00">Giga Hangman</h1>
+<h1 style="font-family: 'Times New Roman', Times, serif;color:coral">Giga Hangman</h1>
 
 <button onclick="newGame()">New Game</button>
 
@@ -84,7 +84,7 @@
         isWinner = false
         document.getElementById('score').innerHTML = score
         document.getElementById('chances').innerHTML = chances
-        document.getElementById('incorrectGuesses').innerHTML = '  '
+        document.getElementById('incorrectGuesses').innerHTML = '| '
 
         document.getElementById('winmsg').style.display = 'none'
         document.getElementById('losemsg').style.display = 'none'
@@ -195,13 +195,13 @@
             }
 
             else {
-                jeffHoles += '  _ '
+                jeffHoles += '_ '
             }
 
         }
 
         document.getElementById('word').innerHTML = jeffHoles
-        if (jeffHoles.includes('  _ ') === false){
+        if (jeffHoles.includes('_ ') === false){
 
             document.getElementById('winmsg').style.display = 'inline-block'
             score += (chances * 100)
