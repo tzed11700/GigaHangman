@@ -44,7 +44,7 @@
     </svg>
 
     <div>
-        <p id="word" style="font-weight: bold;"></p>
+        <p id="word" style="font-weight: bold;font: 'courier new';"></p>
 
         <p>Attempts: <span id="chances"></span></p>
 
@@ -195,13 +195,13 @@
             }
 
             else {
-                jeffHoles += '_'
+                jeffHoles += '_ '
             }
 
         }
 
         document.getElementById('word').innerHTML = jeffHoles
-        if (jeffHoles.includes('_') === false){
+        if (jeffHoles.includes('_ ') === false){
 
             document.getElementById('winmsg').style.display = 'inline-block'
             score += (chances * 100)
