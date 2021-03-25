@@ -12,7 +12,7 @@
 
     <Header>
 
-<h1 style="font-family: 'Times New Roman', Times, serif;color:coral">Giga Hangman</h1>
+<h1 style="font-family: 'Times New Roman', Times, serif;color:#00ff00">Giga Hangman</h1>
 
 <button onclick="newGame()">New Game</button>
 
@@ -196,13 +196,13 @@
             }
 
             else {
-                jeffHoles += '&nbsp;_'
+                jeffHoles += '&EmptySmallSquare;'
             }
 
         }
 
         document.getElementById('word').innerHTML = jeffHoles
-        if (jeffHoles.includes('&nbsp;_') === false){
+        if (jeffHoles.includes('&EmptySmallSquare;') === false){
 
             document.getElementById('winmsg').style.display = 'inline-block'
             score += (chances * 100)
