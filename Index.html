@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giga Hangman</title>
+</head>
+
+
+<body style="background-color: #444444;color: lightgray;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+
+    <Header>
+
+<h1 style="font-family: 'Times New Roman', Times, serif;color:coral">Giga Hangman</h1>
+
+<button onclick="newGame()">New Game</button>
+
+<p>Score: <span id="score"></span></p>
+    </Header>
+
+    <svg height="250" width="400" stroke="#78BE20" fill="transparent">
+        <style>
+            .Rrr { font: italic 40px serif; fill: crimson; }
+        </style>
+        <!--  Gallows  -->
+        <line x1="20" y1="20" x2="140" y2="20"/>
+        <line x1="140" y1="20" x2="140" y2="50"/>
+        <line x1="60" y1="20" x2="60" y2="230"/>
+        <line x1="20" y1="230" x2="180" y2="230"/>
+        <!--  Head  -->
+        <circle id="head" cx="140" cy="70" r="20"/>
+        <!--  Body  -->
+        <line id="body" x1="140" y1="90" x2="140" y2="150"/>
+        <!--  Arms  -->
+        <line id="leftarm" x1="140" y1="120" x2="120" y2="100"/>
+        <line id="rightarm" x1="140" y1="120" x2="160" y2="100"/>
+        <!--  Legs  -->
+        <line id="leftleg" x1="140" y1="150" x2="120" y2="180"/>
+        <line id="rightleg" x1="140" y1="150" x2="160" y2="180"/>
+        <!--  Msgs  -->
+        <text id="losemsg" x="20" y="125" class="Rrr">Sucks 2 Be You</text>
+        <text id="winmsg" x="20" y="125" class="Rrr">Grats Bro</text>
+    </svg>
+
+    <div>
+        <p id="word" style="font-weight: bold;"></p>
+
+        <p>Attempts: <span id="chances"></span></p>
+
+        <p>Bad Letters:</p>
+        <ul style="color: firebrick;font-weight: bold;" id="incorrectGuesses">
+            
+        </ul>
+    </div>
+
+    <div id="buttons">
+        <button>a</button>
+    </div>
+
+<Script src="Word.js"></Script>
+    
+<Script>
+    
+    let alphabet = ['a','B','C','D','e','F','G','h','i','J','k','L','M','n','O','p','Q','R','s','t','U','v','W','x','y','Z']
+
+    let word = ''
+
+    let guesses = []
+
+    let chances
+
+    let score = 0
+
+    let isWinner = false
+
+
+    function newGame() {
+
+        word = newWord()
+        guesses = []
+        buildJeffHoles()
+        chances = 6
+        isWinner = false
+        document.getElementById('score').innerHTML = score
+        document.getElementById('chances').innerHTML = chances
+        document.getElementById('incorrectGuesses').innerHTML = ''
+
+        document.getElementById('winmsg').style.display = 'none'
+        document.getElementById('losemsg').style.display = 'none'
+        document.getElementById('head').style.display = 'none'
+        document.getElementById('body').style.display = 'none'
+        document.getElementById('leftarm').style.display = 'none'
+        document.getElementById('rightarm').style.display = 'none'
+        document.getElementById('leftleg').style.display = 'none'
+        document.getElementById('rightleg').style.display = 'none'
+
+    }
+    
+    function newWord() {
+
+        let word = words[Math.floor(Math.random() * words.length)]
+        return word
+
+    }
+
+    function alphabetButtons() {
+        
+        var buttons = ''
+
+        for (jeff=0; jeff<alphabet.length; jeff++) {
+            buttons += '<button onclick="guess(\'' + alphabet[jeff] + '\')">' + alphabet[jeff] + '</button>'
+            
+        }
+
+        document.getElementById('buttons').innerHTML = buttons
+
+    }
+
+    function guess(jeff) {
+        
+        if (chances ===0 || isWinner){
+            return
+        }
+
+        jeff = jeff.toLowerCase()
+
+        if (guesses.includes(jeff)) {
+            alert('Dumb Bitch, ' + jeff.toUpperCase() + ' is dead!' )
+            return
+        }
+
+        guesses.push(jeff)
+
+        let correctGuess = false
+
+        if (word.toLowerCase().split('').includes(jeff)){
+            correctGuess = true
+            buildJeffHoles()
+        }
+
+        if (correctGuess === false) {
+            chances--
+            hang()
+            document.getElementById('chances').innerHTML = chances
+            let currentIncorrectGuesses = document.getElementById('incorrectGuesses').innerHTML
+            document.getElementById('incorrectGuesses').innerHTML = currentIncorrectGuesses + ' ' + jeff.toUpperCase()
+        }
+
+        if (chances === 0) {
+            document.getElementById('losemsg').style.display = 'inline-block'
+            score = 0
+            document.getElementById('word').innerHTML = word
+
+        }
+
+    }
+
+    function hang() {
+
+        if (chances === 5) {
+            document.getElementById('head').style.display = 'inline-block'
+        }
+
+        if (chances === 4) {
+            document.getElementById('body').style.display = 'inline-block'
+        }
+
+        if (chances === 3) {
+            document.getElementById('leftarm').style.display = 'inline-block'
+        }
+
+        if (chances === 2) {
+            document.getElementById('rightarm').style.display = 'inline-block'
+        }
+
+        if (chances === 1) {
+            document.getElementById('leftleg').style.display = 'inline-block'
+        }
+
+        if (chances === 0) {
+            document.getElementById('rightleg').style.display = 'inline-block'
+        }
+
+    }
+
+    function buildJeffHoles(){
+
+        let jeffHoles = ''
+
+        for (jeff=0; jeff < word.split('').length; jeff++){
+
+            if (guesses.includes(word[jeff].toLowerCase()) || word[jeff]===' ' ){
+                jeffHoles += word[jeff]
+            }
+
+            else {
+                jeffHoles += '_'
+            }
+
+        }
+
+        document.getElementById('word').innerHTML = jeffHoles
+        if (jeffHoles.includes('_') === false){
+
+            document.getElementById('winmsg').style.display = 'inline-block'
+            score += (chances * 100)
+            document.getElementById('score').innerHTML = score
+            isWinner = true
+
+        }
+
+    }
+
+    alphabetButtons()
+    newGame()
+
+    function keyPressed(event){
+
+        if (event.keyCode >= 65 && event.keyCode <= 90) {
+            guess(event.key)
+        console.log(event)
+        }
+
+    }
+
+    window.onkeyup = keyPressed
+
+
+
+</Script>
+
+</body>
+</html>
