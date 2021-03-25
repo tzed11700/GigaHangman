@@ -196,13 +196,13 @@
             }
 
             else {
-                jeffHoles += '_'
+                jeffHoles += '&nbsp;_ '
             }
 
         }
 
         document.getElementById('word').innerHTML = jeffHoles
-        if (jeffHoles.includes('_') === false){
+        if (jeffHoles.includes('&nbsp;_ ') === false){
 
             document.getElementById('winmsg').style.display = 'inline-block'
             score += (chances * 100)
