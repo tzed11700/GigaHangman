@@ -114,5 +114,8 @@ let words = [
     'Shadowlands',
     'Simp',
     'Mythic',
+    'Icarrus',
+    'Taelia',
+    'Bolvar',
     
 ]
