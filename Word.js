@@ -105,5 +105,14 @@ let words = [
     'Void Elf',
     'Lightforged Draenei',
     'Mechagnome',
+    'Medivh',
+    'Killex',
+    'Rexdiesel',
+    'Archimonde',
+    'Titanslayer'
+    'Argus',
+    'Shadowlands',
+    'Simp',
+    'Mythic',
     
 ]
