@@ -109,7 +109,7 @@ let words = [
     'Killex',
     'Rexdiesel',
     'Archimonde',
-    'Titanslayer'
+    'Titanslayer',
     'Argus',
     'Shadowlands',
     'Simp',
