@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giga Hangman.</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Giga Hangman</title>
 </head>
 
 
-<body style="background-color: #444444;color: lightgray;font-family: Verdana, Geneva, Tahoma, sans-serif;">
-
+<body>
+<div class="box">
     <Header>
 
-<p style="font-weight: bold;font-family:Palatino Linotype;color:coral; font-size:50px;">Giga Hangman</p>
+<p id="title">Giga Hangman</p>
 
-<button onclick="newGame()">New Game</button>
+<div class="newJeff" onclick="newGame()">New Game</div>
 
-<p>Score: <span id="score"></span></p>
+<p id="scoreTitle">Score: <span id="score"></span></p>
     </Header>
 
-    <svg height="250" width="400" stroke="#78BE20" fill="transparent">
-        <style>
-            .Rrr { font: italic 40px serif; fill: crimson; }
-        </style>
+    <div id="gallows"><svg id="img" stroke="#ccc" fill="transparent">
         <!--  Gallows  -->
         <line x1="20" y1="20" x2="140" y2="20"/>
         <line x1="140" y1="20" x2="140" y2="50"/>
@@ -39,27 +37,30 @@
         <line id="leftleg" x1="140" y1="150" x2="120" y2="180"/>
         <line id="rightleg" x1="140" y1="150" x2="160" y2="180"/>
         <!--  Msgs  -->
-        <text id="losemsg" x="20" y="125" class="Rrr">Sucks 2 Be You</text>
-        <text id="winmsg" x="20" y="125" class="Rrr">Grats Bro</text>
-    </svg>
+        <text id="losemsg" x="20" y="125" class="Rrr loserRed">Sux 2 Be U</text>
+        <text id="winmsg" x="20" y="125" class="Rrr winnerGreen">Grats Bro</text>
+    </svg></div>
 
-    <div>
-        <p id="word" style="font-weight: bold;font-family: 'Courier New';letter-spacing: 4px; font-size:x-large;"></p>
+    <div id="controlBar">
+        <p id="word"></p>
 
-        <p>Attempts: <span id="chances"></span></p>
+        <div id="status">
 
-        <p>Bad Letters:</p>
-        <ul style="color: crimson;font-weight: bold;font-family: 'Courier New'; font-size:x-large;" id="incorrectGuesses">
+            <p>Attempts: <span id="chances"></span></p>
+
+            <p>Bad Letters:</p>
+            <p id="incorrectGuesses"></p>
             
-        </ul>
-        
+        </div>
+
+        <div id="buttons">
+            <button>a</button>
+        </div>
+
     </div>
 
-    <div id="buttons">
-        <button>a</button>
-    </div>
-
-<Script src="Word.js"></Script>
+</div>
+<Script src="words.js"></Script>
     
 <Script>
     
@@ -85,7 +86,7 @@
         isWinner = false
         document.getElementById('score').innerHTML = score
         document.getElementById('chances').innerHTML = chances
-        document.getElementById('incorrectGuesses').innerHTML = '&nbsp;'
+        document.getElementById('incorrectGuesses').innerHTML = ''
 
         document.getElementById('winmsg').style.display = 'none'
         document.getElementById('losemsg').style.display = 'none'
@@ -109,9 +110,26 @@
         
         var buttons = ''
 
-        for (jeff=0; jeff<alphabet.length; jeff++) {
+        var layout = [['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['Z','X','C','V','B','N','M']]
+
+        var colors = ['red','orange','yellow','green','blue','purple','pink']
+
+        var rainbow = 0
+
+        /*for (jeff=0; jeff<alphabet.length; jeff++) {
             buttons += '<button onclick="guess(\'' + alphabet[jeff] + '\')">' + alphabet[jeff] + '</button>'
             
+        }*/
+
+        for (row=0; row<layout.length; row++) {
+            buttons += '<div class="jeffRows">'
+            for (jeff=0; jeff<layout[row].length; jeff++) {
+                buttons += '<button class="'+colors[rainbow++]+'" onclick="guess(\'' + layout[row][jeff] + '\')">' + layout[row][jeff] + '</button>'
+                if (rainbow==7){
+                    rainbow=0
+                }
+            }
+            buttons += '</div>'
         }
 
         document.getElementById('buttons').innerHTML = buttons
@@ -145,7 +163,7 @@
             hang()
             document.getElementById('chances').innerHTML = chances
             let currentIncorrectGuesses = document.getElementById('incorrectGuesses').innerHTML
-            document.getElementById('incorrectGuesses').innerHTML = currentIncorrectGuesses + ' ' + jeff.toUpperCase()
+            document.getElementById('incorrectGuesses').innerHTML = currentIncorrectGuesses + " " + jeff.toUpperCase()
         }
 
         if (chances === 0) {
