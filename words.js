@@ -273,4 +273,6 @@ let words = [
     'Antoran Wastes',
     'Mechagon Island',
     'Nazjatar',
+    'AlAkir',
+    'Therazane',
     ]
