@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Giga Hangman</title>
+    <title>Giga Realm Hangman</title>
 </head>
 
 
@@ -13,7 +13,7 @@
 <div class="box">
     <Header>
 
-<p id="title">Giga Hangman</p>
+<p id="title">Giga Realm Hangman</p>
 
 <div class="newJeff" onclick="newGame()">New Game</div>
 
@@ -22,7 +22,7 @@
 
     <div id="gallows"><svg id="img" stroke="#ccc" fill="transparent">
         <!--  Gallows  -->
-        <line x1="20" y1="20" x2="140" y2="20"/>
+        <line x1="20" y1="20" x2="140.5" y2="20"/>
         <line x1="140" y1="20" x2="140" y2="50"/>
         <line x1="60" y1="20" x2="60" y2="230"/>
         <line x1="20" y1="230" x2="180" y2="230"/>
@@ -37,8 +37,8 @@
         <line id="leftleg" x1="140" y1="150" x2="120" y2="180"/>
         <line id="rightleg" x1="140" y1="150" x2="160" y2="180"/>
         <!--  Msgs  -->
-        <text id="losemsg" x="20" y="125" class="Rrr loserRed">Sux 2 Be U</text>
-        <text id="winmsg" x="20" y="125" class="Rrr winnerGreen">Grats Bro</text>
+        <text id="losemsg" x="20" y="125" class="msgScript loserRed">Rekt</text>
+        <text id="winmsg" x="20" y="125" class="msgScript winnerGreen">Grats Bro</text>
     </svg></div>
 
     <div id="controlBar">
@@ -48,7 +48,7 @@
 
             <p>Attempts: <span id="chances"></span></p>
 
-            <p>Bad Letters:</p>
+            <p>Dead Letters:</p>
             <p id="incorrectGuesses"></p>
             
         </div>
