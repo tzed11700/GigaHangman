@@ -79,6 +79,7 @@
 
     function newGame() {
 
+        if (!isWinner){score = 0}
         word = newWord()
         guesses = []
         buildJeffHoles()
@@ -238,6 +239,10 @@
 
         if (event.keyCode >= 65 && event.keyCode <= 90) {
             guess(event.key)
+        }
+
+        if (event.keyCode ==13||event.keyCode ==32) {
+            newGame()
         }
 
     }
